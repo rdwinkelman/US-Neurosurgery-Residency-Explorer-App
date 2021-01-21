@@ -1,0 +1,12 @@
+name: US_Neurosurgery_Residents_Explorer_App
+title: US_Neurosurgery_Residents_Explorer_App
+username:
+account: rdwinkelman
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3504319
+bundleId: 4127475
+url: https://rdwinkelman.shinyapps.io/US_Neurosurgery_Residents_Explorer_App/
+when: 1611269175.01942
+asMultiple: FALSE
+asStatic: FALSE
