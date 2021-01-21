@@ -41,8 +41,7 @@ resident_data <- read_excel("2020_10_11_US_Neurosurgery_Residents.xlsx") %>%
 
 ## Register Google API Key
 ```{r}
-#register_google(key="{enter your key here}")
-register_google(key="AIzaSyBxrfbLN79mqK_KG6D9h8ybAq85GqmW2KY")
+register_google(key="{enter your Google API key here}")
 ```
 
 ## Geocode Medical School Addresses
@@ -62,7 +61,7 @@ toc()
 
 
 ## Geocode Program Addresses
-```{r message=F, warning=F}
+```{r }
 tic()
 unique_program_addresses <- resident_data %>%
   distinct(program,program_address) %>%
