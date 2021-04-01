@@ -182,6 +182,7 @@ server <- function(input, output,session) {
                           choices = combined_program_school_geo_data %>%
                               filter(data_type == input$data_type) %>%
                               distinct(primary_name) %>%
+                            arrange(primary_name) %>%
                               pull(primary_name),
                           selected = ifelse(input$data_type == "By Program",
                                             "Cleveland Clinic",
@@ -194,6 +195,7 @@ server <- function(input, output,session) {
                           choices = combined_program_school_geo_data %>%
                               filter(data_type == input$data_type_2) %>%
                               distinct(primary_name) %>%
+                            arrange(primary_name) %>%
                               pull(primary_name),
                           selected = ifelse(input$data_type_2 == "By Program",
                                             "Cleveland Clinic",
