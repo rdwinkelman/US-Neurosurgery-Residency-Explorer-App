@@ -15,10 +15,10 @@ library(shinydashboard)
 library(shinythemes)
 library(shiny)
 
-resident_data_w_geo_code <- read_rds("Data/2022_06_07_resident_data_w_geo_code.rds")
+resident_data_w_geo_code <- read_rds("Data/2020_10_31_resident_data_w_geo_code.rds")
 
-wide_sum_data_program<- read_rds("Data/2022_06_07_wide_sum_data_program.rds")
-wide_sum_data_med_school <- read_rds("Data/2022_06_07_wide_sum_data_med_school.rds")
+wide_sum_data_program<- read_rds("Data/2020_10_31_wide_sum_data_program.rds")
+wide_sum_data_med_school <- read_rds("Data/2020_10_31_wide_sum_data_med_school.rds")
 
 combined_program_school_geo_data <- wide_sum_data_program%>%
     mutate(data_type = "By Program") %>%
@@ -45,7 +45,7 @@ combined_program_school_geo_data <- wide_sum_data_program%>%
                          sum_data = data,
                          sum_label = label))
 
-long_sum_data_program <- read_rds("Data/2022_06_07_long_sum_data_program.rds")
+long_sum_data_program <- read_rds("Data/2020_10_31_long_sum_data_program.rds")
 
 combined_geo_long <- long_sum_data_program %>%
     mutate(data_type = "By Program") %>%
@@ -63,16 +63,16 @@ combined_geo_long <- long_sum_data_program %>%
                          lat))
 
 
-program_data_details <- read_rds("Data/2022_06_07_program_data_details.rds")
-medical_school_data_details <- read_rds("Data/2022_06_07_medical_school_data_details.rds")
+program_data_details <- read_rds("Data/2020_10_31_program_data_details.rds")
+medical_school_data_details <- read_rds("Data/2020_10_31_medical_school_data_details.rds")
 
 combined_data_details <- program_data_details %>%
     bind_rows(medical_school_data_details) %>%
     filter(!is.na(primary_name))
 
 
-data_w_geo_code_sum_program <- read_rds("Data/2022_06_07_data_w_geo_code_sum_program.rds")
-data_w_geo_code_sum_medical_school <- read_rds("Data/2022_06_07_data_w_geo_code_sum_medical_school.rds")
+data_w_geo_code_sum_program <- read_rds("Data/2020_10_31_data_w_geo_code_sum_program.rds")
+data_w_geo_code_sum_medical_school <- read_rds("Data/2020_10_31_data_w_geo_code_sum_medical_school.rds")
   
 combined_summary_data <- data_w_geo_code_sum_program %>%
     bind_rows(data_w_geo_code_sum_medical_school)
@@ -81,7 +81,7 @@ center_of_us <- tibble(long = -98.5795,
                        lat=39.8283)
 
 
-overtime_data <- read_rds("Data/2022_06_07_overtime_data.rds")
+overtime_data <- read_rds("Data/2020_10_31_overtime_data.rds")
 
 
 
@@ -216,7 +216,7 @@ server <- function(input, output,session) {
                                                "% w/ PhD",
                                                "# w/ PhD")),
                                         list(c("# of Residents",
-                                               "% of Home Students",                          
+                                               "% of Home Students",
                                                "# of Home Students",
                                                "% of Female Residents",
                                                "# of Female Residents",
@@ -499,7 +499,7 @@ output$summaryGenericCompTable <- DT::renderDataTable({
 
       
       plot_bar <- test_df %>%
-        filter(intern_year>2014) %>%
+        filter(intern_year!=2013) %>%
         ggplot(aes(x=intern_year,y=y_total,text=paste0("Year: ",intern_year,
                                                                 "<br>",input$quant_cat_3,": ",y_total),
                    group=1))+
@@ -509,7 +509,7 @@ output$summaryGenericCompTable <- DT::renderDataTable({
                            limits = c(0,max(test_df$y_total)),
                            breaks = scales::pretty_breaks(n=5)
                            )+
-        scale_x_continuous(breaks=seq(2015,2021,1))+
+        scale_x_continuous(breaks=seq(2014,2020,1))+
         labs(y=input$quant_cat_3,
              x="Intern Class Year",
              title = paste0("Trend in ",input$quant_cat_3, " Over Time"))+
